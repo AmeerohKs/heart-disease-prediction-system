@@ -43,6 +43,7 @@ The SVM model achieved the highest performance and was selected as the final pre
 ----------
 
 🏗 Project Structure
+
 heart-disease-prediction-system/
 │
 ├── data/
