@@ -1,23 +1,25 @@
 import joblib
 import pandas as pd
 
-# Load pipeline
+print("Loading model...")
+
 model = joblib.load("models/final_svm_pipeline.pkl")
 
-# Load original dataset structure
-data = pd.read_csv("data/heart.csv")  # your original dataset
+print("\n=== Heart Disease Prediction System ===")
 
-# Take first row as template
-sample = data.drop("target", axis=1).iloc[[0]].copy()
+age = float(input("Age: "))
+trestbps = float(input("Resting Blood Pressure: "))
+chol = float(input("Cholesterol: "))
+thalach = float(input("Max Heart Rate: "))
+oldpeak = float(input("Oldpeak: "))
 
-print("=== Heart Disease Prediction System ===")
-
-# Modify some fields
-sample["age"] = float(input("Age: "))
-sample["trestbps"] = float(input("Resting Blood Pressure: "))
-sample["chol"] = float(input("Cholesterol: "))
-sample["thalach"] = float(input("Max Heart Rate: "))
-sample["oldpeak"] = float(input("Oldpeak: "))
+sample = pd.DataFrame([{
+    "age": age,
+    "trestbps": trestbps,
+    "chol": chol,
+    "thalach": thalach,
+    "oldpeak": oldpeak
+}])
 
 prediction = model.predict(sample)
 probability = model.predict_proba(sample)[0][1]
